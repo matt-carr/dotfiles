@@ -1,0 +1,32 @@
+[password]
+	helper = cache
+[alias]
+	branch-name = !git rev-parse --abbrev-ref HEAD
+	publish = !git push -u origin $(git branch-name)
+	mcommit = commit --no-edit
+	cb = checkout -b
+	lg = log --pretty=format:'%C(yellow)%h %Cred%ad %C(magenta)%an%Cgreen%d %Creset%s' --date=short
+	co = checkout
+[credential]
+	helper = cache --timeout=360000
+[user]
+	name = Matt Carr
+	email = matthew.carr96@gmail.com
+[help]
+	autocorrect = 5
+[merge]
+	tool = kdiff3
+[mergetool "kdiff3"]
+	cmd = \"/cygdrive/c/Program Files/KDiff3/kdiff3\" $BASE $LOCAL $REMOTE -o $MERGED --auto
+	keepBackup = false
+[core]
+[push]
+[pull]
+
+[push]
+	default = simple
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
