@@ -8,21 +8,14 @@
 	lg = log --pretty=format:'%C(yellow)%h %Cred%ad %C(magenta)%an%Cgreen%d %Creset%s' --date=short
 	co = checkout
 [credential]
-	helper = cache --timeout=360000
+	helper = cache
 [user]
 	name = Matt Carr
-	email = matthew.carr96@gmail.com
+	email = matthew.carr@rubikloud.com
 [help]
 	autocorrect = 5
 [merge]
 	tool = kdiff3
-[mergetool "kdiff3"]
-	cmd = \"/cygdrive/c/Program Files/KDiff3/kdiff3\" $BASE $LOCAL $REMOTE -o $MERGED --auto
-	keepBackup = false
-[core]
-[push]
-[pull]
-
 [push]
 	default = simple
 [filter "lfs"]
@@ -30,3 +23,8 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+[mergetool "kdiff3"]
+	path = /Applications/kdiff3.app/Contents/MacOS/kdiff3
+	trustExitCode = false
+[mergetool]
+	keepBackup = false
