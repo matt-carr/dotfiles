@@ -7,6 +7,8 @@
 	cb = checkout -b
 	lg = log --pretty=format:'%C(yellow)%h %Cred%ad %C(magenta)%an%Cgreen%d %Creset%s' --date=short
 	co = checkout
+	amend = commit --amend
+	full-send = push --force-with-lease
 [credential]
 	helper = cache
 [user]
@@ -24,7 +26,11 @@
 	required = true
 	clean = git-lfs clean -- %f
 [mergetool "kdiff3"]
-	path = /Applications/kdiff3.app/Contents/MacOS/kdiff3
+	path = "/c/Program Files/KDiff3/kdiff3.exe"
 	trustExitCode = false
 [mergetool]
 	keepBackup = false
+[core]
+	fileMode = false
+	editor = vim
+	autocrlf = input
