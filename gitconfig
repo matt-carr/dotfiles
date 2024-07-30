@@ -1,23 +1,29 @@
 [password]
 	helper = cache
 [alias]
-	branch-name = !git rev-parse --abbrev-ref HEAD
+    branch-name = !git rev-parse --abbrev-ref HEAD
+    remote-branch = !git rev-parse --abbrev-ref --symbolic-full-name @{u}
 	publish = !git push -u origin $(git branch-name)
 	mcommit = commit --no-edit
 	cb = checkout -b
-	lg = log --pretty=format:'%C(yellow)%h %Cred%ad %C(magenta)%an%Cgreen%d %Creset%s' --date=short
+    lg = log --pretty=format:'%C(yellow)%h %Cred%ad %C(magenta)%an%Cgreen%d %Creset%s' --date=short
 	co = checkout
-	amend = commit --amend
+    amend = commit --amend
+    qamend = commit --amend --no-edit
+    force-pull = !git reset --hard $(git remote-branch)
 	full-send = push --force-with-lease
+	yeet = push --force-with-lease
+    sync = reset --hard \"origin/$(git branch-name)\"
 [credential]
 	helper = cache
 [user]
 	name = Matt Carr
-	email = matthew.carr@rubikloud.com
+	email = mcarr@kinaxis.com
 [help]
 	autocorrect = 5
 [merge]
-	tool = kdiff3
+    tool = kdiff3
+    conflictstyle = diff3
 [push]
 	default = simple
 [filter "lfs"]
@@ -26,11 +32,20 @@
 	required = true
 	clean = git-lfs clean -- %f
 [mergetool "kdiff3"]
-	path = "/c/Program Files/KDiff3/kdiff3.exe"
+	path = /mnt/c/Program Files/KDiff3/kdiff3.exe
 	trustExitCode = false
 [mergetool]
 	keepBackup = false
 [core]
 	fileMode = false
 	editor = vim
-	autocrlf = input
+    autocrlf = input
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true
+    light = false
+[diff]
+    colorMoved = default
+
