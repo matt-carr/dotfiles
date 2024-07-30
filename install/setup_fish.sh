@@ -1,8 +1,8 @@
 # install fish
 echo "Adding fish PPA and installing fish"
-sudo apt-add-repository ppa:fish-shell/release-3
-sudo apt-get update
-sudo apt-get install fish
+sudo apt-add-repository ppa:fish-shell/release-3 -y
+sudo apt-get update -y
+sudo apt-get install fish -y
 
 confDir=$(fish -c 'echo $__fish_config_dir')
 
@@ -10,15 +10,19 @@ sudo chsh -s /usr/bin/fish
 
 # update fish config
 echo "Updating Fish Config"
-cp config.fish $confDir/config.fish
-cp -r fish_functions $confDir/functions
+cp ../fish/config.fish $confDir/config.fish
+cp -r ../fish/functions $confDir/functions
+
+# setup pyenv
+fish -c "set -Ux PYENV_ROOT $HOME/.pyenv"
+fish -c "fish_add_path $PYENV_ROOT/bin"
 
 # install fisher
 echo "Installing fisher and plugins"
 fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
 
 # install plugins
-cp fish_plugins $confDir/fish_plugins.fish
+cp ../fish/fish_plugins $confDir/fish_plugins
 fish -c "fisher update"
 
 # configure tide shell
@@ -28,6 +32,4 @@ fish -c "tide configure --auto --style=Classic --prompt_colors='True color' --cl
 echo "Setting up git"
 cp ../gitconfig ~/.gitconfig
 
-# setup pyenv
-set -Ux PYENV_ROOT $HOME/.pyenv
-fish_add_path $PYENV_ROOT/bin
+echo "========Fish Setup Complete!========"

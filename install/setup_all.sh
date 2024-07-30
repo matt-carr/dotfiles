@@ -1,6 +1,6 @@
 #!/bin/sh
-
-sh install_tools.sh
-sh install_fish.sh
-sh install_bash.sh
-sh install_vim.sh
+PWD=$(pwd)
+(exec $PWD/install_tools.sh)
+(exec $PWD/install_fish.sh)
+(exec $PWD/install_bash.sh)
+(exec $PWD/install_vim.sh)
