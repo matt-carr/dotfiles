@@ -32,3 +32,8 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
 echo "Configuring git"
 cp ../gitconfig ~/.gitconfig
+echo "Enter your email address"
+read email
+git config --global user.email $email
+
+echo "Install kdiff3 and run the following command: git config --global mergetool.kdiff3.path (which kdiff3)"
